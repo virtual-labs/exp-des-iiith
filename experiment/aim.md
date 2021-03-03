@@ -1,1 +1,1 @@
-### Aim of the experiment
+In this experiment, you are asked to design the triple DES cryptosystem provided that you are given an implementation of DES.

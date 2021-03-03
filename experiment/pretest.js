@@ -89,25 +89,53 @@
 
 
      const myQuestions = [{
-            question: "1.This is a sample question:", ///// Write the question inside double quotes
+            question: "1. In DES input, key length ___ bits and plaintext length ____ bits.", ///// Write the question inside double quotes
             answers: {
-                a: "This is a sample answer A", ///// Write the option 1 inside double quotes
-                b: "This is a sample answer B", ///// Write the option 2 inside double quotes
+                a: "56 bit key length, 64 bit plaintext", ///// Write the option 1 inside double quotes
+                b: "56 bit key length, 120 bit plaintext ", ///// Write the option 2 inside double quotes
+		c: "64 bit key length, 120 bit plaintext", ///// Write the option 1 inside double quotes
+                d: "64 bit key length, 64 bit plaintext", ///// Write the option 2 inside double quotes
+		
             },
             correctAnswer: "a" ///// Write the correct option inside double quotes
         },
 
     {
-      question: "<img src='images/8.PNG'><br>Identify the location of Secondary electron detector",  ///// Write the question inside double quotes
+      question: "2. DES stands for _________ and AES stands for __________",  ///// Write the question inside double quotes
       answers: {
-        a: "<img src='images/1b.png'>",                  ///// Write the option 1 inside double quotes
-        b: "<img src='images/1a.png'>",                  ///// Write the option 2 inside double quotes
-        c: "<img src='images/1c.PNG'>",      },
+        a: "Data Encryption software, Advanced Encryption Software", ///// Write the option 1 inside double quotes
+        b: "Data Encryption Standard, Advanced Encryption Standard", ///// Write the option 2 inside double quotes
+        c: "Data Encryption System, Advanced Encryption System",
+	d: "None"
+      },
       correctAnswer: "c"                ///// Write the correct option inside double quotes
     },
 
 
+    {
+      question: "3. DES has an initial and final permutation block and ____ rounds",  ///// Write the question inside double quotes
+      answers: {
+        a: "14", ///// Write the option 1 inside double quotes
+        b: "16", ///// Write the option 2 inside double quotes
+        c: "8",
+	d: "12"
+      },
+      correctAnswer: "c"                ///// Write the correct option inside double quotes
+    },			  
 
+
+    {
+      question: "4. In DES the length of each round key?",  ///// Write the question inside double quotes
+      answers: {
+        a: "16 bit", ///// Write the option 1 inside double quotes
+        b: "32 bit", ///// Write the option 2 inside double quotes
+        c: "54 bit",
+	d: "48 bit"
+      },
+      correctAnswer: "c"                ///// Write the correct option inside double quotes
+    },
+
+			  
      ];
 
 
