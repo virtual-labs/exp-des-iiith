@@ -7,6 +7,85 @@
 <body>
 		<!-- Your code goes here-->
 
+ <p><b>PART I</b></p>
+                            <p> </p>
+                            <form name="stuff">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">Message</td>
+                                            <td>
+                                                <input id="plaintext" readonly="readonly" size="65" type="text" value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001"/>
+                                                <input onclick="changePlaintext();" type="button" value="Change plaintext"/>
+                                                <br/>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Key Part A</td>
+                                            <td>
+                                                <input id="keya" readonly="readonly" size="25" type="text" value="3b3898371520f75e"/>
+                                                <input onclick="changeKeyA();" type="button" value="Change Key A"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Key Part B</td>
+                                            <td>
+                                                <input id="keyb" name="keyb" readonly="readonly" size="25" type="text" value="922fb510c71f436e"/>
+                                                <input onclick="changeKeyB();" type="button" value="Change Key B"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <hr/>
+                                <br/>
+                                <p><b>PART II</b></p>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">Your text to be encrypted/decrypted:</td>
+                                            <td>
+                                                <input id="plaintext" name="indata" size="65" type="text"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Key to be used:</td>
+                                            <td>
+                                                <input id="key" name="key" size="25" type="text"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" colspan="2">
+                                                <input onclick="do_des(true);" type="button" value="DES Encrypt"/>
+                                                <input onclick="do_des(false);" type="button" value="DES Decrypt"/>
+                                                <br/>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">Output:</td>
+                                            <td>
+                                                <input name="outdata" size="65" type="text"/>
+                                                <br/>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <hr/>
+                            <br/>
+                            <p><b>PART III</b></p>
+                            <p>Enter your answer here: </p>
+                            <p>
+                                <input id="userans" size="65" type="text"/>
+                            </p>
+                            <p>
+                                <input onclick="checkAnswer();" type="button" value="Check Answer!"/> </p>
+                            <div id="notification" style="width: 300px; height: 10px; padding-top: 20px;"></div>
+                            <p></p>
+
 	<!-- Add JS at the bottom of HTML file --> 
         <script src="./js/main.js"></script>
 </body>
