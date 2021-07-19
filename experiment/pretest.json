@@ -4,7 +4,7 @@
             "a": "56 bit key length, 64 bit plaintext", 
             "b": "56 bit key length, 120 bit plaintext ", 
             "c": "64 bit key length, 120 bit plaintext", 
-            "d": "64 bit key length, 64 bit plaintext", 
+            "d": "64 bit key length, 64 bit plaintext"
            },
 "correctAnswer": "a" },
 
