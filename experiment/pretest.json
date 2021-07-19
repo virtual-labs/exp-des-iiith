@@ -1,4 +1,5 @@
 [{
+<<<<<<< HEAD
 "question": "1. In DES input, key length ___ bits and plaintext length ____ bits.", 
 "answers": {
             "a": "56 bit key length, 64 bit plaintext", 
@@ -12,6 +13,21 @@
 "question": "2. DES stands for _________ and AES stands for __________",
 "answers": {
             "a": "Data Encryption software, Advanced Encryption Software",
+=======
+"question": "1. In DES input, key length ___ bits and plaintext length ____ bits.",
+"answers": {
+            "a": "56 bit key length, 64 bit plaintext", 
+            "b": "56 bit key length, 120 bit plaintext ", 
+            "c": "64 bit key length, 120 bit plaintext", 
+            "d": "64 bit key length, 64 bit plaintext", 
+           },
+"correctAnswer": "a" },
+
+{
+"question": "2. DES stands for _________ and AES stands for __________", 
+"answers": {
+            "a": "Data Encryption software, Advanced Encryption Software", 
+>>>>>>> d9dbe1cd196a3ebcdcb2bdeb71f196dfb787776f
             "b": "Data Encryption Standard, Advanced Encryption Standard", 
             "c": "Data Encryption System, Advanced Encryption System",
 	    "d": "None"
@@ -22,6 +38,7 @@
 "question": "3. DES has an initial and final permutation block and ____ rounds",
 "answers": {
             "a": "14", 
+<<<<<<< HEAD
             "b": "16",
             "c": "8",
 	    "d": "12"
@@ -38,4 +55,23 @@
            },
 "correctAnswer": "c" },
 	  
+=======
+            "b": "16", 
+            "c": "8",
+	    "d": "12"
+      },
+"correctAnswer": "c"  },			  
+
+{
+"question": "4. In DES the length of each round key?", 
+"answers": {
+            "a": "16 bit", 
+            "b": "32 bit", 
+            "c": "54 bit",
+	    "d": "48 bit"
+      },
+"correctAnswer": "c" }
+
+			  
+>>>>>>> d9dbe1cd196a3ebcdcb2bdeb71f196dfb787776f
 ]
