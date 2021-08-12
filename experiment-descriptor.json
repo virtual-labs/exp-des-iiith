@@ -33,7 +33,7 @@
       "label": "Assignment",
       "unit-type": "task",
       "content-type": "text"
-    }
+    },
     {
       "target": "references.html",
       "source": "references.md",
