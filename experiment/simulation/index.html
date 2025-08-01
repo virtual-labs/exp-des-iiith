@@ -1,92 +1,221 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+  <head>
+    <!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <div class="alert-warning">
+      This simulation is optimized for desktop view. For best experience on
+      smaller screens, please use landscape (horizontal) orientation.
+    </div>
+    <hr />
+    <p><b>PART I</b></p>
+    <p></p>
+    <form name="stuff">
+      <table>
+        <tbody>
+          <tr>
+            <td valign="top">
+              Message:
+              <span
+                class="info-icon"
+                title="This is the plaintext message for PART I. It must be 64 bits (e.g., 00010100...1000001)."
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input
+                id="plaintext"
+                readonly="readonly"
+                size="65"
+                type="text"
+                value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001"
+              />
+              <input
+                onclick="changePlaintext();"
+                type="button"
+                value="Change plaintext"
+              />
+              <br />
+              <br />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Key Part A:
+              <span
+                class="info-icon"
+                title="This is the first key for PART I/TDES. It must be 16 hex digits (e.g., 3b3898371520f75e)."
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input
+                id="keya"
+                readonly="readonly"
+                size="25"
+                value="3b3898371520f75e"
+              />
+              <input
+                onclick="changeKeyA();"
+                type="button"
+                value="Change Key A"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Key Part B:
+              <span
+                class="info-icon"
+                title="This is the second key for TDES. It must be 16 hex digits (e.g., 922fb510c71f436e)."
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input
+                id="keyb"
+                readonly="readonly"
+                size="25"
+                type="text"
+                value="922fb510c71f436e"
+              />
+              <input
+                onclick="changeKeyB();"
+                type="button"
+                value="Change Key B"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <hr />
+      <br />
+      <p><b>PART II</b></p>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              Your text to be encrypted/decrypted:
+              <span
+                class="info-icon"
+                title="Enter the plaintext for PART II. Choose ASCII for 8 characters (e.g., ABCDEFGH) or Hex for 16 digits (e.g., 0123456789ABCDEF)."
+                >ℹ️</span
+              >
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <label for="inputType">Plaintext Input Type:</label>
+              <span
+                class="info-icon"
+                title="Select the format for your plaintext input. ASCII: 8 characters (e.g., ABCDEFGH) Hex: 16 digits (e.g., 0123456789ABCDEF)"
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <select id="inputType">
+                <option value="ascii">ASCII (8 characters)</option>
+                <option value="hex">Hex (16 digits)</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="plaintext2">Plaintext:</label>
+              <span
+                class="info-icon"
+                title="Enter your plaintext here.Example (ASCII): ABCDEFGH  Example (Hex): 0123456789ABCDEF"
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input id="plaintext2" name="indata" size="65" type="text" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Key to be used:
+              <span
+                class="info-icon"
+                title="Enter the key for DES/TDES. It must be exactly 16 hexadecimal digits. Example: 3b3898371520f75e"
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input id="key" name="key" size="25" type="text" />
+            </td>
+          </tr>
+          <tr>
+            <td align="center" colspan="2">
+              <input
+                onclick="do_des(true);"
+                type="button"
+                value="DES Encrypt"
+              />
+              <input
+                onclick="do_des(false);"
+                type="button"
+                value="DES Decrypt"
+              />
+              <br />
+              <br />
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">
+              Output:
+              <span
+                class="info-icon"
+                title="This field shows the result of DES encryption or decryption. Output will be a 64-bit string."
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input name="outdata" size="65" type="text" />
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">
+              TDES Output:
+              <span
+                class="info-icon"
+                title="This field shows the result of Triple DES (TDES) encryption. Output will be a 64-bit string."
+                >ℹ️</span
+              >
+            </td>
+            <td>
+              <input id="tdesout" size="65" type="text" readonly />
+              <input
+                onclick="showTDES();"
+                type="button"
+                value="Show TDES Output"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <hr />
+    <br />
+    <p><b>PART III</b></p>
+    <p>Enter your answer here:</p>
+    <p>
+      <input id="userans" size="65" type="text" />
+    </p>
+    <p>
+      <input onclick="checkAnswer();" type="button" value="Check Answer!" />
+    </p>
+    <div
+      id="notification"
+      style="width: 300px; height: 10px; padding-top: 20px"
+    ></div>
+    <p></p>
 
- <p><b>PART I</b></p>
-                            <p> </p>
-                            <form name="stuff">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td valign="top">Message</td>
-                                            <td>
-                                                <input id="plaintext" readonly="readonly" size="65" type="text" value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001"/>
-                                                <input onclick="changePlaintext();" type="button" value="Change plaintext"/>
-                                                <br/>
-                                                <br/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Key Part A</td>
-                                            <td>
-                                                <input id="keya" readonly="readonly" size="25" type="text" value="3b3898371520f75e"/>
-                                                <input onclick="changeKeyA();" type="button" value="Change Key A"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Key Part B</td>
-                                            <td>
-                                                <input id="keyb" name="keyb" readonly="readonly" size="25" type="text" value="922fb510c71f436e"/>
-                                                <input onclick="changeKeyB();" type="button" value="Change Key B"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <br/>
-                                <hr/>
-                                <br/>
-                                <p><b>PART II</b></p>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td valign="top">Your text to be encrypted/decrypted:</td>
-                                            <td>
-                                                <input id="plaintext" name="indata" size="65" type="text"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Key to be used:</td>
-                                            <td>
-                                                <input id="key" name="key" size="25" type="text"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" colspan="2">
-                                                <input onclick="do_des(true);" type="button" value="DES Encrypt"/>
-                                                <input onclick="do_des(false);" type="button" value="DES Decrypt"/>
-                                                <br/>
-                                                <br/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top">Output:</td>
-                                            <td>
-                                                <input name="outdata" size="65" type="text"/>
-                                                <br/>
-                                                <br/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                            <hr/>
-                            <br/>
-                            <p><b>PART III</b></p>
-                            <p>Enter your answer here: </p>
-                            <p>
-                                <input id="userans" size="65" type="text"/>
-                            </p>
-                            <p>
-                                <input onclick="checkAnswer();" type="button" value="Check Answer!"/> </p>
-                            <div id="notification" style="width: 300px; height: 10px; padding-top: 20px;"></div>
-                            <p></p>
-
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="js/des.js"></script>
-</body>
+    <!-- Add JS at the bottom of HTML file -->
+    <script src="js/main.js"></script>
+  </body>
 </html>
