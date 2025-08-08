@@ -929,7 +929,7 @@ function get_plaintext(bitarray, str) {
 }
 
 // get the message to encrypt/decrypt
-function get_value(bitarray, str, isASCII) {
+function get_value(bitarray, str, isASCII, fieldName) {
   var i;
   var val; // one hex digit
 
@@ -939,7 +939,10 @@ function get_value(bitarray, str, isASCII) {
   if (isASCII) {
     // check length of data
     if (str.length != 8) {
-      window.alert("Message and key must be 64 bits (8 ASCII characters)");
+      window.alert(
+        (fieldName || "Input") +
+          " must be exactly 8 ASCII characters when using ASCII mode.\nExample: ABCDEFGH"
+      );
       bitarray[0] = ERROR_VAL;
       return;
     }
@@ -954,7 +957,10 @@ function get_value(bitarray, str, isASCII) {
 
     // check length of data
     if (str.length != 16) {
-      window.alert("Message and key must be 64 bits (16 hex digits)");
+      window.alert(
+        (fieldName || "Input") +
+          " must be exactly 16 hexadecimal digits.\nExample: 0123456789ABCDEF"
+      );
       bitarray[0] = ERROR_VAL;
       return;
     }
@@ -975,7 +981,11 @@ function get_value(bitarray, str, isASCII) {
         val -= 87;
       else {
         // not 0-9 or A-F, complain
-        window.alert(str.charAt(i) + " is not a valid hex digit");
+        window.alert(
+          str.charAt(i) +
+            " is not a valid hex digit in " +
+            (fieldName || "input")
+        );
         bitarray[0] = ERROR_VAL;
         return;
       }
@@ -1160,13 +1170,18 @@ function do_des(do_encrypt) {
   var isASCII = document.getElementById("inputType").value === "ascii";
 
   // Get the message from the user using get_value
-  get_value(inData, document.getElementById("plaintext2").value, isASCII);
+  get_value(
+    inData,
+    document.getElementById("plaintext2").value,
+    isASCII,
+    "Plaintext"
+  );
   if (inData[0] == ERROR_VAL) {
     return;
   }
 
   // Get the key from the user (always hex for DES)
-  get_value(Key, document.getElementById("key").value, false);
+  get_value(Key, document.getElementById("key").value, false, "Key");
   if (Key[0] == ERROR_VAL) {
     return;
   }
@@ -1191,19 +1206,24 @@ function do_tdes(do_encrypt) {
   var isASCII = document.getElementById("inputType").value === "ascii";
 
   // Get the message from the user using get_value
-  get_value(inData, document.getElementById("plaintext2").value, isASCII);
+  get_value(
+    inData,
+    document.getElementById("plaintext2").value,
+    isASCII,
+    "Plaintext"
+  );
   if (inData[0] == ERROR_VAL) {
     return;
   }
 
   // Get the key part A from the user (always hex for DES)
-  get_value(KeyA, document.getElementById("keya").value, false);
+  get_value(KeyA, document.getElementById("keya").value, false, "Key Part A");
   if (KeyA[0] == ERROR_VAL) {
     return;
   }
 
   // Get the key part B from the user (always hex for DES)
-  get_value(KeyB, document.getElementById("keyb").value, false);
+  get_value(KeyB, document.getElementById("keyb").value, false, "Key Part B");
   if (KeyB[0] == ERROR_VAL) {
     return;
   }
@@ -1238,11 +1258,17 @@ function randomKey(length) {
 }
 
 function changeKeyA() {
-  document.getElementById("keya").value = randomKey(16);
+  var newKey = randomKey(16);
+  document.getElementById("keya").value = newKey;
+  // Update configuration overview
+  document.getElementById("currentKeyA").textContent = newKey;
 }
 
 function changeKeyB() {
-  document.getElementById("keyb").value = randomKey(16);
+  var newKey = randomKey(16);
+  document.getElementById("keyb").value = newKey;
+  // Update configuration overview
+  document.getElementById("currentKeyB").textContent = newKey;
 }
 
 function changePlaintext() {
@@ -1251,22 +1277,91 @@ function changePlaintext() {
   for (var i = 0; i < length; i++) {
     str += Math.floor((Math.random() * 1000) % 2);
   }
-  document.getElementById("plaintext").value = format_bitstring(str, 8);
+  var formattedStr = format_bitstring(str, 8);
+  document.getElementById("plaintext").value = formattedStr;
+  // Update configuration overview
+  document.getElementById("currentMessage").textContent = formattedStr;
 }
 
 function checkAnswer() {
   var user_answer = remove_spaces(document.getElementById("userans").value);
   var actual_answer = remove_spaces(do_tdes(true));
+  var notification = document.getElementById("notification");
+
   if (user_answer == actual_answer) {
-    document.getElementById("notification").innerHTML = "CORRECT!";
+    notification.innerHTML = "🎉 CORRECT! Well done!";
+    notification.className = "success";
+    notification.style.display = "block";
+    // Hide answer explanation if it was shown
+    document.getElementById("answerExplanation").style.display = "none";
   } else {
-    document.getElementById("notification").innerHTML =
-      "Something is wrong .. please try again!";
+    notification.innerHTML = "❌ Something is wrong... please try again!";
+    notification.className = "error";
+    notification.style.display = "block";
   }
+}
+
+// Reveal the correct answer with detailed explanation
+function revealAnswer() {
+  var correct_answer = remove_spaces(do_tdes(true));
+  var keyA = document.getElementById("keya").value;
+  var keyB = document.getElementById("keyb").value;
+  var message = document.getElementById("plaintext").value;
+
+  // Display the correct answer
+  document.getElementById("correctAnswer").textContent = correct_answer;
+
+  // Update explanation with current values
+  var explanationDiv = document.getElementById("explanationText");
+  explanationDiv.innerHTML = `
+    <p><strong>Why this is correct:</strong></p>
+    <p>This result comes from the Triple DES (3DES) encryption process using your current configuration:</p>
+    <ul style="margin: 10px 0; padding-left: 20px;">
+      <li><strong>Message:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">${message}</code></li>
+      <li><strong>Key Part A:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">${keyA}</code></li>
+      <li><strong>Key Part B:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">${keyB}</code></li>
+    </ul>
+    <p><strong>The 3DES Process:</strong></p>
+    <ol style="margin: 10px 0; padding-left: 20px;">
+      <li><strong>Step 1:</strong> DES Encrypt the message using Key Part A</li>
+      <li><strong>Step 2:</strong> DES Decrypt the result from Step 1 using Key Part B</li>
+      <li><strong>Step 3:</strong> DES Encrypt the result from Step 2 using Key Part A again</li>
+    </ol>
+    <p>The formula is: <strong>3DES(M) = DES<sub>KeyA</sub>(DES<sup>-1</sup><sub>KeyB</sub>(DES<sub>KeyA</sub>(M)))</strong></p>
+    <p style="color: #155724; font-weight: 500;">💡 This three-step process provides stronger security than single DES by effectively using a longer key length and making brute-force attacks computationally infeasible.</p>
+  `;
+
+  // Show the explanation section
+  document.getElementById("answerExplanation").style.display = "block";
+
+  // Hide any existing notification
+  document.getElementById("notification").style.display = "none";
+
+  // Scroll to the explanation
+  document
+    .getElementById("answerExplanation")
+    .scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 // Show TDES output in the simulation
 function showTDES() {
   var tdes_output = do_tdes(true);
   document.getElementById("tdesout").value = tdes_output;
+}
+
+// Update input format guidance based on selected type
+function updateInputFormat() {
+  var inputType = document.getElementById("inputType").value;
+  var plaintextInput = document.getElementById("plaintext2");
+  var plaintextInfo = document.getElementById("plaintextInfo");
+
+  if (inputType === "ascii") {
+    plaintextInput.placeholder = "ABCDEFGH";
+    plaintextInfo.title =
+      "Enter your plaintext here. Example (ASCII): ABCDEFGH";
+  } else {
+    plaintextInput.placeholder = "0123456789ABCDEF";
+    plaintextInfo.title =
+      "Enter your plaintext here. Example (Hex): 0123456789ABCDEF";
+  }
 }

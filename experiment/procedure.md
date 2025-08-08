@@ -1,15 +1,28 @@
-**Step 1:** In **PART I** of the simulation page, click the respective buttons to generate the Plaintext (**m**), **Key Part A** (**keyA**), and **Key Part B** (**keyB**). Use the info icons next to each field for guidance and examples.
+**Step 1:** In **Part I: Key Configuration**, observe the current message and keys displayed in the **DES Configuration Overview** section. You can modify these by clicking the respective buttons:
 
-**Step 2:** In **PART II**, select the appropriate Plaintext Input Type (ASCII or Hex) using the dropdown. Enter the generated Plaintext (**m**) from **PART I** into the "Your text to be encrypted/decrypted:" field.
+- Click **"Change plaintext"** to generate a new random 64-bit message
+- Click **"Change Key A"** to generate a new random hexadecimal key for Part A
+- Click **"Change Key B"** to generate a new random hexadecimal key for Part B
 
-**Step 3:** Enter **keyA** from **PART I** into the "Key to be used:" field in **PART II**. Click the **DES Encrypt** button to generate ciphertext **c1** (First Encryption). The result will appear in the Output field.
+**Step 2:** In **Part II: Encryption/Decryption Operations**, select your preferred input type:
 
-**Step 4:** Copy ciphertext **c1** from the Output field and enter it back into the "Your text to be encrypted/decrypted:" field in **PART II**.
+- Choose **"ASCII (8 characters)"** for text input like "ABCDEFGH"
+- Choose **"Hex (16 digits)"** for hexadecimal input like "0123456789ABCDEF"
 
-**Step 5:** Enter **keyB** from **PART I** into the "Key to be used:" field in **PART II**. Click the **DES Decrypt** button to generate ciphertext **c2** (Second Encryption). The result will appear in the Output field.
+**Step 3:** Enter your plaintext in the **Plaintext** field and a 16-digit hexadecimal key in the **Key** field. Use the info icons (ℹ️) for format guidance and examples.
 
-**Step 6:** Copy ciphertext **c2** from the Output field and enter it again into the "Your text to be encrypted/decrypted:" field in **PART II**.
+**Step 4:** Perform DES operations:
 
-**Step 7:** Enter **keyA** from **PART I** into the "Key to be used:" field in **PART II**. Click the **DES Encrypt** button to generate ciphertext **c3** (Third Encryption). This completes Triple DES (TDES) encryption.
+- Click **"DES Encrypt"** to encrypt your plaintext using standard DES
+- Click **"DES Decrypt"** to decrypt ciphertext back to plaintext
+- The result will appear in the **Output** field
 
-**Step 8:** Copy ciphertext **c3** from the Output field in **PART II** and enter it into the "Enter your answer here:" field in **PART III** to verify your Triple DES result.
+**Step 5:** Generate Triple DES (3DES) result:
+
+- Click **"Show TDES Output"** to automatically perform the complete 3DES encryption process
+- This uses the message and keys from Part I to perform: Encrypt(KeyA) → Decrypt(KeyB) → Encrypt(KeyA)
+- The 3DES result will appear in the **TDES Output** field
+
+**Step 6:** In **Part III: Answer Verification**, enter your calculated 3DES result in the **"Your Answer"** field and click **"Check Answer!"** to verify if it matches the expected output.
+
+**Step 7:** If you need help, click **"Reveal Answer"** to see the correct 3DES result along with a detailed explanation of the Triple DES encryption process and why it provides enhanced security over standard DES.

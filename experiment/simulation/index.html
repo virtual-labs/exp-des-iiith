@@ -3,219 +3,204 @@
   <head>
     <!-- Add CSS at the head of HTML file -->
     <link rel="stylesheet" href="./css/main.css" />
+    <script src="js/mobile-detection.js"></script>
   </head>
   <body>
-    <div class="alert-warning">
-      This simulation is optimized for desktop view. For best experience on
-      smaller screens, please use landscape (horizontal) orientation.
-    </div>
-    <hr />
-    <p><b>PART I</b></p>
-    <p></p>
-    <form name="stuff">
-      <table>
-        <tbody>
+    <div class="content" id="experiment-article-section-4-content">
+      <!-- DES Configuration Overview -->
+      <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin: 15px 0; border: 2px solid #4a90e2;">
+        <h3>🔐 DES Configuration Overview</h3>
+        <p>Current encryption setup and parameters for DES/3-DES operations:</p>
+        <table style="width: 100%">
           <tr>
-            <td valign="top">
-              Message:
-              <span
-                class="info-icon"
-                title="This is the plaintext message for PART I. It must be 64 bits (e.g., 00010100...1000001)."
-                >ℹ️</span
-              >
-            </td>
+            <td><strong>Current Message:</strong></td>
             <td>
-              <input
-                id="plaintext"
-                readonly="readonly"
-                size="65"
-                type="text"
-                value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001"
-              />
-              <input
-                onclick="changePlaintext();"
-                type="button"
-                value="Change plaintext"
-              />
-              <br />
-              <br />
+              <span id="currentMessage" style="font-family: monospace; color: #495057;">00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001</span>
             </td>
           </tr>
           <tr>
+            <td><strong>Key Part A:</strong></td>
             <td>
-              Key Part A:
-              <span
-                class="info-icon"
-                title="This is the first key for PART I/TDES. It must be 16 hex digits (e.g., 3b3898371520f75e)."
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <input
-                id="keya"
-                readonly="readonly"
-                size="25"
-                value="3b3898371520f75e"
-              />
-              <input
-                onclick="changeKeyA();"
-                type="button"
-                value="Change Key A"
-              />
+              <span id="currentKeyA" style="font-family: monospace; color: #495057;">3b3898371520f75e</span>
             </td>
           </tr>
           <tr>
+            <td><strong>Key Part B:</strong></td>
             <td>
-              Key Part B:
-              <span
-                class="info-icon"
-                title="This is the second key for TDES. It must be 16 hex digits (e.g., 922fb510c71f436e)."
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <input
-                id="keyb"
-                readonly="readonly"
-                size="25"
-                type="text"
-                value="922fb510c71f436e"
-              />
-              <input
-                onclick="changeKeyB();"
-                type="button"
-                value="Change Key B"
-              />
+              <span id="currentKeyB" style="font-family: monospace; color: #495057;">922fb510c71f436e</span>
             </td>
           </tr>
-        </tbody>
-      </table>
-      <br />
-      <hr />
-      <br />
-      <p><b>PART II</b></p>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              Your text to be encrypted/decrypted:
-              <span
-                class="info-icon"
-                title="Enter the plaintext for PART II. Choose ASCII for 8 characters (e.g., ABCDEFGH) or Hex for 16 digits (e.g., 0123456789ABCDEF)."
-                >ℹ️</span
-              >
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              <label for="inputType">Plaintext Input Type:</label>
-              <span
-                class="info-icon"
-                title="Select the format for your plaintext input. ASCII: 8 characters (e.g., ABCDEFGH) Hex: 16 digits (e.g., 0123456789ABCDEF)"
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <select id="inputType">
-                <option value="ascii">ASCII (8 characters)</option>
-                <option value="hex">Hex (16 digits)</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="plaintext2">Plaintext:</label>
-              <span
-                class="info-icon"
-                title="Enter your plaintext here.Example (ASCII): ABCDEFGH  Example (Hex): 0123456789ABCDEF"
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <input id="plaintext2" name="indata" size="65" type="text" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Key to be used:
-              <span
-                class="info-icon"
-                title="Enter the key for DES/TDES. It must be exactly 16 hexadecimal digits. Example: 3b3898371520f75e"
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <input id="key" name="key" size="25" type="text" />
-            </td>
-          </tr>
-          <tr>
-            <td align="center" colspan="2">
-              <input
-                onclick="do_des(true);"
-                type="button"
-                value="DES Encrypt"
-              />
-              <input
-                onclick="do_des(false);"
-                type="button"
-                value="DES Decrypt"
-              />
-              <br />
-              <br />
-            </td>
-          </tr>
-          <tr>
-            <td valign="top">
-              Output:
-              <span
-                class="info-icon"
-                title="This field shows the result of DES encryption or decryption. Output will be a 64-bit string."
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <input name="outdata" size="65" type="text" />
-            </td>
-          </tr>
-          <tr>
-            <td valign="top">
-              TDES Output:
-              <span
-                class="info-icon"
-                title="This field shows the result of Triple DES (TDES) encryption. Output will be a 64-bit string."
-                >ℹ️</span
-              >
-            </td>
-            <td>
-              <input id="tdesout" size="65" type="text" readonly />
-              <input
-                onclick="showTDES();"
-                type="button"
-                value="Show TDES Output"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-    <hr />
-    <br />
-    <p><b>PART III</b></p>
-    <p>Enter your answer here:</p>
-    <p>
-      <input id="userans" size="65" type="text" />
-    </p>
-    <p>
-      <input onclick="checkAnswer();" type="button" value="Check Answer!" />
-    </p>
-    <div
-      id="notification"
-      style="width: 300px; height: 10px; padding-top: 20px"
-    ></div>
-    <p></p>
+        </table>
+      </div>
 
-    <!-- Add JS at the bottom of HTML file -->
-    <script src="js/main.js"></script>
-  </body>
-</html>
+      <!-- PART I: Key Configuration -->
+      <h3>Part I: Key Configuration</h3>
+      <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+        <div style="background: #f0f8ff; padding: 12px; border-radius: 6px; border-left: 4px solid #007bff; margin: 10px 0;">
+          <p><strong>🔑 DES Key Setup:</strong></p>
+          <p style="font-size: 14px; color: #666; margin: 5px 0">
+            Configure the message and encryption keys for DES and Triple DES operations. Each key must be exactly 16 hexadecimal digits.
+          </p>
+        </div>
+        <form name="stuff">
+          <table style="width: 100%">
+            <tbody>
+              <tr>
+                <td><strong>Message:</strong>
+                  <span class="info-icon" title="This is the plaintext message for PART I. It must be 64 bits (e.g., 00010100...1000001)." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                </td>
+                <td>
+                  <input id="plaintext" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001" />
+                </td>
+                <td>
+                  <input onclick="changePlaintext();" type="button" value="Change plaintext" style="background: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Key Part A:</strong>
+                  <span class="info-icon" title="This is the first key for PART I/TDES. It must be 16 hex digits (e.g., 3b3898371520f75e)." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                </td>
+                <td>
+                  <input id="keya" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" value="3b3898371520f75e" />
+                </td>
+                <td>
+                  <input onclick="changeKeyA();" type="button" value="Change Key A" style="background: #fd7e14; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Key Part B:</strong>
+                  <span class="info-icon" title="This is the second key for TDES. It must be 16 hex digits (e.g., 922fb510c71f436e)." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                </td>
+                <td>
+                  <input id="keyb" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" value="922fb510c71f436e" />
+                </td>
+                <td>
+                  <input onclick="changeKeyB();" type="button" value="Change Key B" style="background: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PART II: Encryption/Decryption Operations -->
+        <h3>Part II: Encryption/Decryption Operations</h3>
+        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+          <div style="background: #f0f8ff; padding: 12px; border-radius: 6px; border-left: 4px solid #007bff; margin: 10px 0;">
+            <p><strong>🔒 Interactive Encryption:</strong></p>
+            <p style="font-size: 14px; color: #666; margin: 5px 0">
+              Enter your own plaintext and key to perform DES encryption and decryption operations. Choose between ASCII text input or hexadecimal format.
+            </p>
+          </div>
+          <form name="stuff2">
+            <table style="width: 100%">
+              <tbody>
+                <tr>
+                  <td><strong>Input Type:</strong></td>
+                  <td>
+                    <select id="inputType" onchange="updateInputFormat()" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                      <option value="ascii" selected>ASCII (8 characters)</option>
+                      <option value="hex">Hex (16 digits)</option>
+                    </select>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong>Plaintext:</strong>
+                    <span class="info-icon" id="plaintextInfo" title="Enter your plaintext here. Example (ASCII): ABCDEFGH" style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                  </td>
+                  <td>
+                    <input id="plaintext2" name="indata" placeholder="ABCDEFGH" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" />
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong>Key:</strong>
+                    <span class="info-icon" title="Enter the key for DES/TDES. It must be exactly 16 hexadecimal digits. Example: 3b3898371520f75e" style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                  </td>
+                  <td>
+                    <input id="key" name="key" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" />
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top: 15px;">
+                    <input onclick="do_des(true);" type="button" value="DES Encrypt" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 10px;" />
+                    <input onclick="do_des(false);" type="button" value="DES Decrypt" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;" />
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong>Output:</strong>
+                    <span class="info-icon" title="This field shows the result of DES encryption or decryption. Output will be a 64-bit string." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                  </td>
+                  <td>
+                    <input name="outdata" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; background: #f8f9fa;" type="text" />
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><strong>TDES Output:</strong>
+                    <span class="info-icon" title="This field shows the result of Triple DES (TDES) encryption. Output will be a 64-bit string." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                  </td>
+                  <td>
+                    <input id="tdesout" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; background: #f8f9fa;" type="text" />
+                  </td>
+                  <td>
+                    <input onclick="showTDES();" type="button" value="Show TDES Output" style="background: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+
+        <!-- PART III: Answer Verification -->
+        <h3>Part III: Answer Verification</h3>
+        <div style="background: #f8d7da; padding: 15px; border-radius: 8px; margin: 15px 0;">
+          <div style="background: #f0f8ff; padding: 12px; border-radius: 6px; border-left: 4px solid #dc3545; margin: 10px 0;">
+            <p><strong>📝 Verify Your Understanding:</strong></p>
+            <p style="font-size: 14px; color: #666; margin: 5px 0">
+              Based on the encryption results from the previous parts, enter your answer to verify your understanding of the DES encryption process.
+            </p>
+          </div>
+
+          <table style="width: 100%">
+            <tbody>
+              <tr>
+                <td style="width: 15%;"><strong>Your Answer:</strong></td>
+                <td style="width: 50%;">
+                  <input id="userans" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" />
+                </td>
+                <td style="width: 35%; text-align: center;">
+                  <input onclick="checkAnswer();" type="button" value="Check Answer!" style="background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 5px;" />
+                  <input onclick="revealAnswer();" type="button" value="Reveal Answer" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div id="notification" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
+          
+          <!-- Answer explanation section -->
+          <div id="answerExplanation" style="margin-top: 15px; padding: 15px; border-radius: 8px; background: #e8f5e8; border-left: 4px solid #28a745; display: none;">
+            <h4 style="margin-top: 0; color: #155724;">💡 Correct Answer & Explanation</h4>
+            <p><strong>Correct Answer:</strong> <span id="correctAnswer" style="font-family: monospace; color: #000; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #ccc;"></span></p>
+            <div id="explanationText">
+              <p><strong>Why this is correct:</strong></p>
+              <p>This result comes from the Triple DES (3DES) encryption process, which involves:</p>
+              <ol>
+                <li><strong>Step 1:</strong> DES Encrypt the message using Key Part A</li>
+                <li><strong>Step 2:</strong> DES Decrypt the result using Key Part B</li>
+                <li><strong>Step 3:</strong> DES Encrypt the result using Key Part A again</li>
+              </ol>
+              <p>The formula is: <strong>3DES(M) = DES<sub>KeyA</sub>(DES<sup>-1</sup><sub>KeyB</sub>(DES<sub>KeyA</sub>(M)))</strong></p>
+              <p>This three-step process provides stronger security than single DES by effectively using a longer key length.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add JS at the bottom of HTML file -->
+      <script src="js/main.js"></script>
+    </body>
+  </html>
