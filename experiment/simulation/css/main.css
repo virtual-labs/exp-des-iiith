@@ -1,1 +1,218 @@
-/* You CSS goes in here */
+/* Main container styling to match MAC experiment */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Info icon styling */
+.info-icon {
+  display: inline-block;
+  margin-left: 6px;
+  color: #1976d2;
+  cursor: pointer;
+  font-size: 12px;
+  vertical-align: middle;
+  transition: all 0.2s;
+  background: #e3f2fd;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.info-icon:hover {
+  background: #bbdefb;
+  color: #0d47a1;
+  transform: scale(1.05);
+}
+
+/* Section styling to match MAC experiment */
+h3 {
+  color: #2c3e50;
+  font-size: 1.4em;
+  margin: 25px 0 15px 0;
+  font-weight: 600;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+table td {
+  padding: 8px 12px;
+  vertical-align: middle;
+}
+
+table td:first-child {
+  width: 20%;
+  font-weight: 500;
+}
+
+table td:nth-child(2) {
+  width: 60%;
+}
+
+table td:last-child {
+  width: 20%;
+  text-align: center;
+}
+
+/* Input styling */
+input[type="text"],
+select {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Button styling */
+input[type="button"] {
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+input[type="button"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Answer explanation styling */
+#answerExplanation {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#answerExplanation h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #155724;
+  border-bottom: 2px solid #28a745;
+  padding-bottom: 8px;
+}
+
+#answerExplanation code {
+  background: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  border: 1px solid #e9ecef;
+}
+
+#answerExplanation ol,
+#answerExplanation ul {
+  line-height: 1.6;
+}
+
+#answerExplanation li {
+  margin-bottom: 5px;
+}
+
+#correctAnswer {
+  font-family: "Courier New", monospace !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Notification styling */
+#notification {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
+}
+
+#notification.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  display: block;
+}
+
+#notification.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  display: block;
+}
+
+/* Mobile overlay styling */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-overlay-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 80%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-overlay h2 {
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.mobile-overlay p {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.mobile-overlay button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mobile-overlay button:hover {
+  background: #2980b9;
+}
