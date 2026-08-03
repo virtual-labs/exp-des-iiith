@@ -1,30 +1,31 @@
 After completing this experiment, you will be able to:
 
-1. **Understand Advanced Encryption Standards**
+### 1. Understand the Data Encryption Standard (DES)
 
-   - Comprehend the Data Encryption Standard (DES) algorithm and its structure
-   - Recognize the limitations of single DES encryption
-   - Understand the evolution from DES to Triple DES (3DES) for enhanced security
+- Explain the principles of symmetric-key encryption.
+- Describe the structure and working of the DES algorithm.
+- Understand the role of block size, key size and Feistel rounds in DES.
 
-2. **Master DES and Triple DES Operations**
+### 2. Perform DES Encryption and Decryption
 
-   - Perform encryption using the DES algorithm with hexadecimal keys
-   - Execute decryption using the DES algorithm
-   - Implement the complete Triple DES encryption process (Encrypt-Decrypt-Encrypt)
+- Encrypt plaintext using DES.
+- Decrypt ciphertext using the same secret key.
+- Verify the correctness of the encryption and decryption processes.
 
-3. **Analyze Cryptographic Key Management**
+### 3. Understand Triple DES (3DES)
 
-   - Understand the importance of 64-bit keys in DES encryption
-   - Learn how Triple DES uses two keys to effectively create a stronger encryption
-   - Compare different input formats (ASCII vs. Hexadecimal) for encryption operations
+- Explain why DES became vulnerable to brute-force attacks.
+- Understand how Triple DES enhances the security of DES.
+- Describe the Encrypt–Decrypt–Encrypt (EDE) operation used in 3DES.
 
-4. **Develop Symmetric Encryption Skills**
+### 4. Analyse Cryptographic Keys
 
-   - Apply DES encryption to both text and binary data
-   - Use multiple keys in sequence for enhanced security
-   - Verify encryption results through systematic testing
+- Distinguish between the 64-bit DES key and its effective 56-bit key length.
+- Understand the use of multiple keys in Triple DES.
+- Compare single DES and Triple DES from a security perspective.
 
-5. **Apply Security Enhancement Techniques**
-   - Implement Triple DES as a solution to DES vulnerabilities
-   - Understand why the Encrypt-Decrypt-Encrypt sequence strengthens security
-   - Evaluate the practical applications of multi-stage encryption processes
+### 5. Evaluate Practical Security
+
+- Compare DES and Triple DES in terms of security and computational cost.
+- Recognize the strengths and limitations of DES in modern cryptographic applications.
+- Appreciate the historical significance of DES in the evolution of symmetric-key encryption.

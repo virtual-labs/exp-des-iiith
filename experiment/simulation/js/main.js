@@ -15,6 +15,142 @@ function format_bitstring(ary, spacing) {
 // special value stored in x[0] to indicate a problem
 var ERROR_VAL = -9876;
 
+function format_binary_groups(bitString) {
+  return bitString.match(/.{1,8}/g).join(" ");
+}
+
+function randomBinaryString(length) {
+  var str = "";
+  for (var i = 0; i < length; i++) {
+    str += Math.floor(Math.random() * 2);
+  }
+  return str;
+}
+
+function set_inline_error(inputId, errorId, message) {
+  var input = document.getElementById(inputId);
+  var error = document.getElementById(errorId);
+  if (input) {
+    input.style.borderColor = "#dc3545";
+    input.style.boxShadow = "0 0 0 2px rgba(220, 53, 69, 0.15)";
+  }
+  if (error) {
+    error.textContent = message;
+    error.style.display = "block";
+  }
+}
+
+function clear_inline_error(inputId, errorId) {
+  var input = document.getElementById(inputId);
+  var error = document.getElementById(errorId);
+  if (input) {
+    input.style.borderColor = "#ccc";
+    input.style.boxShadow = "none";
+  }
+  if (error) {
+    error.textContent = "";
+    error.style.display = "none";
+  }
+}
+
+function validatePartIMessageBinary(messageValue) {
+  var cleaned = remove_spaces(messageValue || "");
+  if (cleaned.length !== 64) {
+    return {
+      valid: false,
+      message: "Message must contain exactly 64 binary digits (8 groups of 8).",
+    };
+  }
+  if (!/^[01]{64}$/.test(cleaned)) {
+    return {
+      valid: false,
+      message: "Message can only contain binary digits 0 and 1.",
+    };
+  }
+  return { valid: true, cleaned: cleaned };
+}
+
+function applyPartIMessage(cleanedBinary64) {
+  var formatted = format_binary_groups(cleanedBinary64);
+  document.getElementById("plaintext").value = formatted;
+  document.getElementById("currentMessage").textContent = formatted;
+}
+
+function validatePartIIPlaintext() {
+  var inputType = document.getElementById("inputType").value;
+  var plaintext = document.getElementById("plaintext2").value;
+
+  if (inputType === "ascii") {
+    if (plaintext.length !== 8) {
+      set_inline_error(
+        "plaintext2",
+        "plaintextValidationError",
+        "Plaintext must be exactly 8 ASCII characters in ASCII mode.",
+      );
+      return false;
+    }
+    for (var i = 0; i < plaintext.length; i++) {
+      if (plaintext.charCodeAt(i) > 127) {
+        set_inline_error(
+          "plaintext2",
+          "plaintextValidationError",
+          "Only ASCII characters (code 0-127) are allowed in ASCII mode.",
+        );
+        return false;
+      }
+    }
+  } else if (inputType === "hex") {
+    var hexPlaintext = remove_spaces(plaintext);
+    if (!/^[0-9a-fA-F]{16}$/.test(hexPlaintext)) {
+      set_inline_error(
+        "plaintext2",
+        "plaintextValidationError",
+        "Plaintext must be exactly 16 hexadecimal digits in Hex mode.",
+      );
+      return false;
+    }
+  } else if (inputType === "binary") {
+    var binaryPlaintext = remove_spaces(plaintext);
+    if (!/^[01]{64}$/.test(binaryPlaintext)) {
+      set_inline_error(
+        "plaintext2",
+        "plaintextValidationError",
+        "Plaintext must be exactly 64 binary digits in Binary mode.",
+      );
+      return false;
+    }
+  }
+
+  clear_inline_error("plaintext2", "plaintextValidationError");
+  return true;
+}
+
+function validateHexKeyField(inputId, errorId, label) {
+  var keyValue = remove_spaces(document.getElementById(inputId).value || "");
+  if (!/^[0-9a-fA-F]{16}$/.test(keyValue)) {
+    set_inline_error(
+      inputId,
+      errorId,
+      label + " must be exactly 16 hexadecimal digits.",
+    );
+    return false;
+  }
+  clear_inline_error(inputId, errorId);
+  return true;
+}
+
+function initializePartIMessage() {
+  var currentValue = document.getElementById("plaintext").value;
+  var messageValidation = validatePartIMessageBinary(currentValue);
+  if (!messageValidation.valid) {
+    var generated = randomBinaryString(64);
+    applyPartIMessage(generated);
+  } else {
+    applyPartIMessage(messageValidation.cleaned);
+  }
+  clear_inline_error("plaintext", "messageValidationError");
+}
+
 // initial permutation (split into left/right halves )
 // since DES numbers bits starting at 1, we will ignore x[0]
 var IP_perm = new Array(
@@ -82,7 +218,7 @@ var IP_perm = new Array(
   31,
   23,
   15,
-  7
+  7,
 );
 
 // final permutation (inverse initial permutation)
@@ -151,7 +287,7 @@ var FP_perm = new Array(
   49,
   17,
   57,
-  25
+  25,
 );
 
 // per-round expansion
@@ -204,7 +340,7 @@ var E_perm = new Array(
   30,
   31,
   32,
-  1
+  1,
 );
 
 // per-round permutation
@@ -241,7 +377,7 @@ var P_perm = new Array(
   22,
   11,
   4,
-  25
+  25,
 );
 
 // note we do use element 0 in the S-Boxes
@@ -309,7 +445,7 @@ var S1 = new Array(
   10,
   0,
   6,
-  13
+  13,
 );
 var S2 = new Array(
   15,
@@ -375,7 +511,7 @@ var S2 = new Array(
   0,
   5,
   14,
-  9
+  9,
 );
 var S3 = new Array(
   10,
@@ -441,7 +577,7 @@ var S3 = new Array(
   11,
   5,
   2,
-  12
+  12,
 );
 var S4 = new Array(
   7,
@@ -507,7 +643,7 @@ var S4 = new Array(
   12,
   7,
   2,
-  14
+  14,
 );
 var S5 = new Array(
   2,
@@ -573,7 +709,7 @@ var S5 = new Array(
   10,
   4,
   5,
-  3
+  3,
 );
 var S6 = new Array(
   12,
@@ -639,7 +775,7 @@ var S6 = new Array(
   6,
   0,
   8,
-  13
+  13,
 );
 var S7 = new Array(
   4,
@@ -705,7 +841,7 @@ var S7 = new Array(
   14,
   2,
   3,
-  12
+  12,
 );
 var S8 = new Array(
   13,
@@ -771,7 +907,7 @@ var S8 = new Array(
   3,
   5,
   6,
-  11
+  11,
 );
 
 //, first, key, permutation
@@ -834,7 +970,7 @@ var PC_1_perm = new Array(
   28,
   20,
   12,
-  4
+  4,
 );
 
 //, per-round, key, selection, permutation
@@ -887,7 +1023,7 @@ var PC_2_perm = new Array(
   50,
   36,
   29,
-  32
+  32,
 );
 
 // save output in case we want to reformat it later
@@ -941,7 +1077,7 @@ function get_value(bitarray, str, isASCII, fieldName) {
     if (str.length != 8) {
       window.alert(
         (fieldName || "Input") +
-          " must be exactly 8 ASCII characters when using ASCII mode.\nExample: ABCDEFGH"
+          " must be exactly 8 ASCII characters when using ASCII mode.\nExample: ABCDEFGH",
       );
       bitarray[0] = ERROR_VAL;
       return;
@@ -959,7 +1095,7 @@ function get_value(bitarray, str, isASCII, fieldName) {
     if (str.length != 16) {
       window.alert(
         (fieldName || "Input") +
-          " must be exactly 16 hexadecimal digits.\nExample: 0123456789ABCDEF"
+          " must be exactly 16 hexadecimal digits.\nExample: 0123456789ABCDEF",
       );
       bitarray[0] = ERROR_VAL;
       return;
@@ -984,14 +1120,14 @@ function get_value(bitarray, str, isASCII, fieldName) {
         window.alert(
           str.charAt(i) +
             " is not a valid hex digit in " +
-            (fieldName || "input")
+            (fieldName || "input"),
         );
         bitarray[0] = ERROR_VAL;
         return;
       }
 
       // add this digit to the array
-      split_int(bitarray, i * 4 + 1, 4, val - 48);
+      split_int(bitarray, i * 4 + 1, 4, val);
     }
   }
 }
@@ -1169,12 +1305,22 @@ function do_des(do_encrypt) {
   // Get input type (ASCII or Hex) from UI (assume radio button or dropdown with id 'inputType')
   var isASCII = document.getElementById("inputType").value === "ascii";
 
+  if (!validatePartIIPlaintext()) {
+    document.getElementsByName("outdata")[0].value = "";
+    return;
+  }
+
+  if (!validateHexKeyField("key", "keyValidationError", "Key")) {
+    document.getElementsByName("outdata")[0].value = "";
+    return;
+  }
+
   // Get the message from the user using get_value
   get_value(
     inData,
     document.getElementById("plaintext2").value,
     isASCII,
-    "Plaintext"
+    "Plaintext",
   );
   if (inData[0] == ERROR_VAL) {
     return;
@@ -1190,7 +1336,7 @@ function do_des(do_encrypt) {
   DES_output = des_encrypt(inData, Key, do_encrypt);
   document.getElementsByName("outdata")[0].value = format_bitstring(
     DES_output,
-    8
+    8,
   );
 }
 
@@ -1205,12 +1351,27 @@ function do_tdes(do_encrypt) {
   // Get input type (ASCII or Hex) from UI (assume radio button or dropdown with id 'inputType')
   var isASCII = document.getElementById("inputType").value === "ascii";
 
+  if (!validatePartIIPlaintext()) {
+    document.getElementById("tdesout").value = "";
+    return;
+  }
+
+  if (!validateHexKeyField("keya", "keyAValidationError", "Key Part A")) {
+    document.getElementById("tdesout").value = "";
+    return;
+  }
+
+  if (!validateHexKeyField("keyb", "keyBValidationError", "Key Part B")) {
+    document.getElementById("tdesout").value = "";
+    return;
+  }
+
   // Get the message from the user using get_value
   get_value(
     inData,
     document.getElementById("plaintext2").value,
     isASCII,
-    "Plaintext"
+    "Plaintext",
   );
   if (inData[0] == ERROR_VAL) {
     return;
@@ -1272,15 +1433,30 @@ function changeKeyB() {
 }
 
 function changePlaintext() {
-  var length = 64;
-  var str = "";
-  for (var i = 0; i < length; i++) {
-    str += Math.floor((Math.random() * 1000) % 2);
+  var currentValue = remove_spaces(document.getElementById("plaintext").value);
+  var userInput = window.prompt(
+    "Enter exactly 64 binary digits (spaces optional). Leave empty to generate a random 64-bit message.",
+    currentValue,
+  );
+
+  if (userInput === null) {
+    return;
   }
-  var formattedStr = format_bitstring(str, 8);
-  document.getElementById("plaintext").value = formattedStr;
-  // Update configuration overview
-  document.getElementById("currentMessage").textContent = formattedStr;
+
+  var cleanedInput = remove_spaces(userInput);
+
+  if (cleanedInput === "") {
+    cleanedInput = randomBinaryString(64);
+  }
+
+  var validation = validatePartIMessageBinary(cleanedInput);
+  if (!validation.valid) {
+    set_inline_error("plaintext", "messageValidationError", validation.message);
+    return;
+  }
+
+  clear_inline_error("plaintext", "messageValidationError");
+  applyPartIMessage(validation.cleaned);
 }
 
 function checkAnswer() {
@@ -1360,8 +1536,29 @@ function updateInputFormat() {
     plaintextInfo.title =
       "Enter your plaintext here. Example (ASCII): ABCDEFGH";
   } else {
-    plaintextInput.placeholder = "0123456789ABCDEF";
-    plaintextInfo.title =
-      "Enter your plaintext here. Example (Hex): 0123456789ABCDEF";
+    if (inputType === "binary") {
+      plaintextInput.placeholder =
+        "0101010101010101010101010101010101010101010101010101010101010101";
+      plaintextInfo.title =
+        "Enter your plaintext here. Example (Binary): 64 bits as 0/1";
+    } else {
+      plaintextInput.placeholder = "0123456789ABCDEF";
+      plaintextInfo.title =
+        "Enter your plaintext here. Example (Hex): 0123456789ABCDEF";
+    }
   }
+
+  validatePartIIPlaintext();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializePartIMessage();
+  updateInputFormat();
+
+  document
+    .getElementById("plaintext2")
+    .addEventListener("input", validatePartIIPlaintext);
+  document.getElementById("key").addEventListener("input", function () {
+    validateHexKeyField("key", "keyValidationError", "Key");
+  });
+});
