@@ -99,6 +99,13 @@ input[type="button"]:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.inline-error {
+  margin-top: 6px;
+  color: #b02a37;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 /* Answer explanation styling */
 #answerExplanation {
   animation: slideIn 0.3s ease-out;

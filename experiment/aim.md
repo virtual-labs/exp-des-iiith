@@ -1,19 +1,17 @@
-A symmetric encryption scheme consists of a set of all possible messages, called the message space **M**, and three algorithms, namely,
+A symmetric-key encryption scheme consists of a message space **M**, a key space **K**, and three fundamental algorithms:
 
-(a) **Gen**
+(a) **Gen** – Generates a secret key from the key space **K**.
 
-(b) **Enc**
+(b) **Enc** – Encrypts a plaintext message **m** using the secret key **k** to produce ciphertext **c**.
 
-(c) **Dec**
+(c) **Dec** – Decrypts the ciphertext **c** using the same secret key **k** to recover the original plaintext **m**.
 
-The algorithm for key generation **Gen** is used to choose a key **k** at random from the set of all possible secret keys, denoted by the key space **K**.
+In symmetric cryptography, both the sender and the receiver use the same secret key for encryption and decryption. Such algorithms are widely used because they provide fast and efficient encryption for large amounts of data.
 
-The algorithm for encryption **Enc** takes as inputs the message **m** and the secret key **k** and outputs the ciphertext **c**.
+The **Data Encryption Standard (DES)** is one of the earliest standardized symmetric-key block ciphers. It encrypts 64-bit blocks of data using an effective 56-bit secret key through 16 rounds of Feistel network operations. Although DES was once considered secure, advances in computing power have made exhaustive key-search (brute-force) attacks practical.
 
-The algorithm for decryption **Dec** inputs the ciphertext **c** and the key **k** and outputs the message **m**.
+To improve security while preserving compatibility with DES, **Triple DES (3DES)** was introduced. Instead of designing a completely new algorithm, Triple DES applies the DES algorithm three times using two or three keys, significantly increasing the effective security against brute-force attacks.
 
-As computing power advances, cryptographic systems that were once considered secure can become vulnerable to attacks. In cryptography, we learn that when an encryption algorithm becomes susceptible to brute force attacks due to computational advances, we need methods to strengthen it without completely redesigning the system.
+**About the Experiment**
 
-**About the experiment:**
-
-In this experiment, we work with the evolution from DES (Data Encryption Standard) to Triple DES (3DES), demonstrating how to enhance an existing encryption scheme. DES, with its 56-bit key, became vulnerable to brute force attacks as computing power increased. Triple DES addresses this vulnerability by applying the DES algorithm three times with different keys, effectively increasing the key space and security. Your task is to design and implement the Triple DES cryptosystem. Specifically, given an implementation of DES, you need to construct 3DES and understand how multiple applications of a cipher can enhance security.
+In this experiment, you will study the working principles of DES and understand its limitations. You will perform DES encryption and decryption, and then implement the Triple DES (3DES) Encrypt–Decrypt–Encrypt (EDE) process using an existing DES implementation. The experiment demonstrates how repeated application of a secure block cipher can considerably strengthen security while maintaining compatibility with legacy DES systems.
