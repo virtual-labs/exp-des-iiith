@@ -1,0 +1,26 @@
+
+/home/runner/work/exp-des-iiith/exp-des-iiith/experiment/simulation/js/main.js
+  1061:10  warning  'get_plaintext' is defined but never used    no-unused-vars
+  1061:34  warning  'str' is defined but never used              no-unused-vars
+  1180:8   warning  'i' is not defined                           no-undef
+  1180:15  warning  'i' is not defined                           no-undef
+  1180:23  warning  'i' is not defined                           no-undef
+  1182:12  warning  'i' is not defined                           no-undef
+  1182:19  warning  'i' is not defined                           no-undef
+  1185:7   warning  'i' is not defined                           no-undef
+  1185:14  warning  'i' is not defined                           no-undef
+  1301:10  warning  'do_des' is defined but never used           no-unused-vars
+  1421:10  warning  'changeKeyA' is defined but never used       no-unused-vars
+  1428:10  warning  'changeKeyB' is defined but never used       no-unused-vars
+  1435:10  warning  'changePlaintext' is defined but never used  no-unused-vars
+  1462:10  warning  'checkAnswer' is defined but never used      no-unused-vars
+  1481:10  warning  'revealAnswer' is defined but never used     no-unused-vars
+  1523:10  warning  'showTDES' is defined but never used         no-unused-vars
+
+/home/runner/work/exp-des-iiith/exp-des-iiith/experiment/simulation/js/mobile-detection.js
+  291:7   warning  'mobileDetection' is assigned a value but never used  no-unused-vars
+  294:38  warning  'module' is not defined                               no-undef
+  295:3   warning  'module' is not defined                               no-undef
+
+✖ 19 problems (0 errors, 19 warnings)
+
