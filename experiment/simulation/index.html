@@ -15,7 +15,7 @@
           <tr>
             <td><strong>Current Message:</strong></td>
             <td>
-              <span id="currentMessage" style="font-family: monospace; color: #495057;">00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001</span>
+              <span id="currentMessage" style="font-family: monospace; color: #495057;">00010100 11010111 01001001 00010010 01111100 10011110 00011011 10000010</span>
             </td>
           </tr>
           <tr>
@@ -47,10 +47,11 @@
             <tbody>
               <tr>
                 <td><strong>Message:</strong>
-                  <span class="info-icon" title="This is the plaintext message for PART I. It must be 64 bits (e.g., 00010100...1000001)." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
+                  <span class="info-icon" title="This is the plaintext message for PART I. It must be 64 bits (e.g., 00010100...10000010)." style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 12px; font-size: 12px; margin-left: 8px;">ℹ️</span>
                 </td>
                 <td>
-                  <input id="plaintext" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 1000001" />
+                  <input id="plaintext" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" value=" 00010100 11010111 01001001 00010010 01111100 10011110 00011011 10000010" />
+                  <div id="messageValidationError" class="inline-error" style="display: none;"></div>
                 </td>
                 <td>
                   <input onclick="changePlaintext();" type="button" value="Change plaintext" style="background: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
@@ -62,6 +63,7 @@
                 </td>
                 <td>
                   <input id="keya" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" value="3b3898371520f75e" />
+                  <div id="keyAValidationError" class="inline-error" style="display: none;"></div>
                 </td>
                 <td>
                   <input onclick="changeKeyA();" type="button" value="Change Key A" style="background: #fd7e14; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
@@ -73,6 +75,7 @@
                 </td>
                 <td>
                   <input id="keyb" readonly="readonly" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" value="922fb510c71f436e" />
+                  <div id="keyBValidationError" class="inline-error" style="display: none;"></div>
                 </td>
                 <td>
                   <input onclick="changeKeyB();" type="button" value="Change Key B" style="background: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" />
@@ -110,6 +113,7 @@
                   </td>
                   <td>
                     <input id="plaintext2" name="indata" placeholder="ABCDEFGH" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" />
+                    <div id="plaintextValidationError" class="inline-error" style="display: none;"></div>
                   </td>
                   <td></td>
                 </tr>
@@ -119,6 +123,7 @@
                   </td>
                   <td>
                     <input id="key" name="key" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace;" type="text" />
+                    <div id="keyValidationError" class="inline-error" style="display: none;"></div>
                   </td>
                   <td></td>
                 </tr>
